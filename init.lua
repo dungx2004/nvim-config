@@ -11,12 +11,12 @@ vim.opt.tabstop = 8
 -- Search option
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- Space to clear highlights after search
-vim.cmd('nnoremap <silent> <Space> :noh<CR>')
+-- Clear highlights after search
+vim.cmd('nnoremap <silent> <leader>h :noh<CR>')
 
--- Ctrl+s to save
-vim.cmd('inoremap <silent> <C-s> <Esc>:w<CR>a')
-vim.cmd('nnoremap <silent> <C-s> <Esc>:w<CR>')
+-- Ctrl+s to save and return to normal mode
+vim.cmd('inoremap <silent> <C-s> <Esc>:w<CR>')
+vim.cmd('nnoremap <silent> <C-s> :w<CR>')
 
 -- lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -47,11 +47,9 @@ require('lazy').setup({
 			{'hrsh7th/cmp-nvim-lsp'},
 			{'hrsh7th/cmp-buffer'},
 			{'hrsh7th/cmp-path'},
-			{'saadparwaiz1/cmp_luasnip'},
-			{'hrsh7th/cmp-nvim-lua'},
 			-- Snippet
 			{'L3MON4D3/LuaSnip'},
-			{'rafamadriz/friendly-snippets'},
+			{'saadparwaiz1/cmp_luasnip'},
 		}
 	},
 	{'lervag/vimtex', lazy = false},
@@ -60,8 +58,8 @@ require('lazy').setup({
 
 -- Colorscheme
 vim.cmd("colorscheme kanagawa-wave") -- Default
--- vim.cmd("colorscheme kanagawa-dragon") -- White
--- vim.cmd("colorscheme kanagawa-lotus") -- Black
+-- vim.cmd("colorscheme kanagawa-dragon") -- Black
+-- vim.cmd("colorscheme kanagawa-lotus") -- White
 
 -- LSP config
 local lsp_zero = require('lsp-zero')
@@ -101,11 +99,13 @@ cmp.setup({
 	mapping = {
 		['<C-k>'] = cmp.mapping.select_prev_item(),
 		['<C-j>'] = cmp.mapping.select_next_item(),
-		['<C-u>'] = cmp.mapping.scroll_docs(-5),
-		['<C-d>'] = cmp.mapping.scroll_docs(5),
+		['<C-p>'] = cmp.mapping.scroll_docs(-5),
+		['<C-n>'] = cmp.mapping.scroll_docs(5),
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
+		['<Tab>'] = cmp.mapping.confirm({ select = true}),
+		--[[
 		['<C-l>'] = cmp.mapping(function(fallback)
 			if luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
@@ -120,6 +120,7 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
+		]]
 	},
 	formatting = {
 		format = function(entry, vim_item)
