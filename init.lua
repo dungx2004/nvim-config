@@ -53,7 +53,7 @@ require('lazy').setup({
 		}
 	},
 	{'lervag/vimtex', lazy = false},
-	{'rlue/vim-barbaric'},
+	{'pysan3/fcitx5.nvim'},
 })
 
 -- Colorscheme
@@ -127,5 +127,12 @@ cmp.setup({
 			vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
 			return vim_item
 		end
+	},
+})
+
+-- fcitx5.nvim
+require('fcitx5').setup({
+	imname = {
+		norm = 'keyboard-us',
 	},
 })
