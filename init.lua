@@ -1,4 +1,5 @@
 vim.g.mapleader=' '
+-- vim.cmd('inoremap <silent> jk <Esc>')
 
 -- Relative numbering
 vim.opt.rnu = true
@@ -14,9 +15,8 @@ vim.o.smartcase = true
 -- Clear highlights after search
 vim.cmd('nnoremap <silent> <leader>h :noh<CR>')
 
--- Ctrl+s to save and return to normal mode
+-- Ctrl+s to save
 vim.cmd('inoremap <silent> <C-s> <Esc>:w<CR>')
-vim.cmd('nnoremap <silent> <C-s> :w<CR>')
 
 -- lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
